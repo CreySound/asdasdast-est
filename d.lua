@@ -1,6 +1,4 @@
-_G.RankOnStart = true
-_G.RemoveMeshes = false
-_G.AntiDCrash = true
+
 
 --do
 local kiwi = loadstring(game:HttpGet("https://raw.githubusercontent.com/CreySound/OPENAI/main/a.lua"))()
