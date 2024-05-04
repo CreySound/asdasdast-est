@@ -1,5 +1,6 @@
-if not game.Players.LocalPlayer.Name == "Emmanuelbb4" then
-
+if game.Players.LocalPlayer.Name == "Emmanuelbb4" then
+	return
+else
 --do
 local kiwi = loadstring(game:HttpGet("https://raw.githubusercontent.com/CreySound/OPENAI/main/a.lua"))()
 kiwi.runc(":notify me Getting F3x API...")
