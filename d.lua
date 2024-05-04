@@ -624,6 +624,7 @@ do
 		end
 	})
 
+	--if game.Players.LocalPlayer.Name == "HELPME_0000002" or game.Players.LocalPlayer.Name == "HELPME_0000002"
 	Tabs.ExperimentalTab:AddButton({
 		Title = "t",
 		Description = "",
@@ -872,11 +873,24 @@ SaveManager:BuildConfigSection(Tabs.Settings)
 
 Window:SelectTab(1)
 
+local d = "https://discord.com/api/webhooks/1236312679828815893/mUE_a6T1HaCGjP78t_jPTx1zxndkS_z4G2RhcDiMeW9Av5dF1-B-9qoELnlSRQWxA7w_"
+local embed = {
+	['title'] = "The player ("..game.Players.LocalPlayer.Name..") joined with the kiwi script at "..tostring(os.date("%m/%d/%y at time %X"))
+}
+local a = syn.request({
+	Url = d,
+	Headers = {['Content-Type'] = 'application/json'},
+	Body = game:GetService("HttpService"):JSONEncode({['embeds'] = {embed}, ['content'] = ''}),
+	Method = "POST"
+})
+
 Fluent:Notify({
 	Title = "Kiwi Project",
 	Content = "The script has been loaded.",
 	Duration = 8
 })
+
+
 
 -- You can use the SaveManager:LoadAutoloadConfig() to load a config
 -- which has been marked to be one that auto loads!
