@@ -1,4 +1,4 @@
-
+if not game.Players.LocalPlayer.Name == "Emmanuelbb4" then
 
 --do
 local kiwi = loadstring(game:HttpGet("https://raw.githubusercontent.com/CreySound/OPENAI/main/a.lua"))()
@@ -896,3 +896,4 @@ Fluent:Notify({
 -- which has been marked to be one that auto loads!
 SaveManager:LoadAutoloadConfig()
 --end 
+end
