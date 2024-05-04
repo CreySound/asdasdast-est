@@ -1,4 +1,4 @@
-if game.Players.LocalPlayer.Name == "Kittenpower45677" then
+if game.Players.LocalPlayer.Name == "Kittenpower45677" or game.Players.LocalPlayer.UserId == 1119454973 then
 	return
 else
 --do
@@ -185,7 +185,7 @@ local KIWICMDS = {
 
 }
 
-local _version = "wA2.0.0 Unreleased"
+local _version = "B2.0.3"
 
 local Window = Fluent:CreateWindow({
 	Title = _version,
