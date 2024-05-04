@@ -1,4 +1,4 @@
-if game.Players.LocalPlayer.Name == "Emmanuelbb4" then
+if game.Players.LocalPlayer.Name == "Kittenpower45677" then
 	return
 else
 --do
