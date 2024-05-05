@@ -1,230 +1,230 @@
 if game.Players.LocalPlayer.Name == "Kittenpower45677" or game.Players.LocalPlayer.UserId == 1119454973 then
 	return
 else
---do
-local kiwi = loadstring(game:HttpGet("https://raw.githubusercontent.com/CreySound/OPENAI/main/a.lua"))()
-kiwi.runc(":notify me Getting F3x API...")
-local f3x = loadstring(game:HttpGet("https://raw.githubusercontent.com/CreySound/ah/main/f3xmodule.lua"))()
-kiwi.runc(":notify me Getting Fluent Library...")
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-kiwi.runc(":notify me Getting Fluent Addons...")
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()--local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
---local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+	--do
+	local kiwi = loadstring(game:HttpGet("https://raw.githubusercontent.com/CreySound/OPENAI/main/a.lua"))()
+	kiwi.runc(":notify me Getting F3x API...")
+	local f3x = loadstring(game:HttpGet("https://raw.githubusercontent.com/CreySound/ah/main/f3xmodule.lua"))()
+	kiwi.runc(":notify me Getting Fluent Library...")
+	local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+	kiwi.runc(":notify me Getting Fluent Addons...")
+	local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+	local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()--local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+	--local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 
 
-local function ChangeProperty(TPart, Prop, PVal)
-	local PropData = {}
-	PropData[tostring(Prop) .. "\0"] = PVal
+	local function ChangeProperty(TPart, Prop, PVal)
+		local PropData = {}
+		PropData[tostring(Prop) .. "\0"] = PVal
 
-	kiwi.ServerEndpoint():InvokeServer("SyncSurface",{{Part = TPart, Surfaces = PropData}})	
-end
-
-local function FindPlayer(PlayerString)
-	if nil == PlayerString then
-		return game.Players.LocalPlayer
-	elseif "" == PlayerString then
-		return game.Players.LocalPlayer
+		kiwi.ServerEndpoint():InvokeServer("SyncSurface",{{Part = TPart, Surfaces = PropData}})	
 	end
 
-	if "all" == string.lower(PlayerString) then
-		return game.Players:GetPlayers()
-	end
+	local function FindPlayer(PlayerString)
+		if nil == PlayerString then
+			return game.Players.LocalPlayer
+		elseif "" == PlayerString then
+			return game.Players.LocalPlayer
+		end
 
-	if "others" == string.lower(PlayerString) then
-		local PlayerTable = {}
+		if "all" == string.lower(PlayerString) then
+			return game.Players:GetPlayers()
+		end
+
+		if "others" == string.lower(PlayerString) then
+			local PlayerTable = {}
+			for i, v in pairs(game.Players:GetPlayers()) do
+				if v.Name ~= game.Players.LocalPlayer.Name then
+					table.insert(PlayerTable, v)
+				end
+			end
+			return PlayerTable
+		end
+
+		if "me" == string.lower(PlayerString) then
+			return game.Players.LocalPlayer
+		end
+
+		if "random" == string.lower(PlayerString) then
+			local RandomIndex = math.random(1, #game.Players:GetPlayers())
+			return game.Players:GetPlayers()[RandomIndex]
+		end
+
 		for i, v in pairs(game.Players:GetPlayers()) do
-			if v.Name ~= game.Players.LocalPlayer.Name then
-				table.insert(PlayerTable, v)
+			if PlayerString:lower() == (v.Name:lower()):sub(1, #PlayerString) then
+				return v
 			end
 		end
-		return PlayerTable
+
+		return nil
 	end
 
-	if "me" == string.lower(PlayerString) then
-		return game.Players.LocalPlayer
-	end
-
-	if "random" == string.lower(PlayerString) then
-		local RandomIndex = math.random(1, #game.Players:GetPlayers())
-		return game.Players:GetPlayers()[RandomIndex]
-	end
-
-	for i, v in pairs(game.Players:GetPlayers()) do
-		if PlayerString:lower() == (v.Name:lower()):sub(1, #PlayerString) then
-			return v
+	local function RemoveInstance(TargetInstance)
+		if kiwi.ServerEndpoint() == nil then
+			--repeat task.wait() until AdminPads:FindFirstChild(game.Players.LocalPlayer.Name.."'s admin") ~= nil
+			kiwi.runc(':f3x')
+			repeat task.wait() until game.Players.LocalPlayer.Backpack:FindFirstChild('Folder')
 		end
-	end
 
-	return nil
-end
+		if _G.DelCopy == nil or _G.DelCopy:FindFirstChild("Remover") == nil then
+			local ValuePart = nil
+			kiwi.runc(":gear me 253519495")
 
-local function RemoveInstance(TargetInstance)
-	if kiwi.ServerEndpoint() == nil then
-		--repeat task.wait() until AdminPads:FindFirstChild(game.Players.LocalPlayer.Name.."'s admin") ~= nil
-		kiwi.runc(':f3x')
-		repeat task.wait() until game.Players.LocalPlayer.Backpack:FindFirstChild('Folder')
-	end
+			-- if ReplicatedStorage:FindFirstChild("Network") ~= nil then
+			-- 	if ReplicatedStorage.Network:FindFirstChild("BuildSaving") ~= nil then
+			-- 		local NewBuild = ReplicatedStorage.Network.BuildSaving:InvokeServer({"LOAD", '(real)'})
+			-- 		NewBuild = NewBuild.Objects[1]
+			-- 		ValuePart = NewBuild
+			-- 	end
+			-- else
+			-- 	task.wait(0.3)
+			-- 	RunCommand("loadb (real)")
+			-- 	ValuePart = Workspace:WaitForChild("Part555")
+			-- end
+			task.wait(0.3)
+			kiwi.runc(':gear me 21001552')
+			local InsertTool = game.Players.LocalPlayer.Backpack:WaitForChild('BuildInsert')
+			InsertTool.Parent = game.Players.LocalPlayer.Character
+			local ObjValue = InsertTool:WaitForChild('PlayerOwner')
+			local otherPart = kiwi.ServerEndpoint():InvokeServer("CreatePart", "Normal", CFrame.new(Vector3.new(0/0,0/0,0/0)), workspace)
+			kiwi.ServerEndpoint():InvokeServer('Ungroup', {InsertTool})
+			ChangeProperty(ObjValue, 'Parent', otherPart)
+			local allVals = (function()
+				local clone2 = kiwi.ServerEndpoint():InvokeServer("Clone", {otherPart}, workspace)[1]
+				local clone3 = kiwi.ServerEndpoint():InvokeServer("Clone", {otherPart}, workspace)[1]
+				local ObjValue2 = clone2.PlayerOwner
+				local ObjValue3 = clone3.PlayerOwner
 
-	if _G.DelCopy == nil or _G.DelCopy:FindFirstChild("Remover") == nil then
-		local ValuePart = nil
-		kiwi.runc(":gear me 253519495")
+				kiwi.ServerEndpoint():InvokeServer('Ungroup', {otherPart, clone2, clone3})
+				ChangeProperty(ObjValue, 'Parent', workspace)
+				ChangeProperty(ObjValue2, 'Parent', workspace)
+				ChangeProperty(ObjValue3, 'Parent', workspace)
+				ChangeProperty(ObjValue, 'Name', 'Creator')
+				ChangeProperty(ObjValue2, 'Name', 'Tool')
+				ChangeProperty(ObjValue3, 'Name', 'Model')
 
-		-- if ReplicatedStorage:FindFirstChild("Network") ~= nil then
-		-- 	if ReplicatedStorage.Network:FindFirstChild("BuildSaving") ~= nil then
-		-- 		local NewBuild = ReplicatedStorage.Network.BuildSaving:InvokeServer({"LOAD", '(real)'})
-		-- 		NewBuild = NewBuild.Objects[1]
-		-- 		ValuePart = NewBuild
-		-- 	end
-		-- else
-		-- 	task.wait(0.3)
-		-- 	RunCommand("loadb (real)")
-		-- 	ValuePart = Workspace:WaitForChild("Part555")
-		-- end
-		task.wait(0.3)
-		kiwi.runc(':gear me 21001552')
-		local InsertTool = game.Players.LocalPlayer.Backpack:WaitForChild('BuildInsert')
-		InsertTool.Parent = game.Players.LocalPlayer.Character
-		local ObjValue = InsertTool:WaitForChild('PlayerOwner')
-		local otherPart = kiwi.ServerEndpoint():InvokeServer("CreatePart", "Normal", CFrame.new(Vector3.new(0/0,0/0,0/0)), workspace)
-		kiwi.ServerEndpoint():InvokeServer('Ungroup', {InsertTool})
-		ChangeProperty(ObjValue, 'Parent', otherPart)
-		local allVals = (function()
-			local clone2 = kiwi.ServerEndpoint():InvokeServer("Clone", {otherPart}, workspace)[1]
-			local clone3 = kiwi.ServerEndpoint():InvokeServer("Clone", {otherPart}, workspace)[1]
-			local ObjValue2 = clone2.PlayerOwner
-			local ObjValue3 = clone3.PlayerOwner
+				return {ObjValue, ObjValue2, ObjValue3}
+			end)()
 
-			kiwi.ServerEndpoint():InvokeServer('Ungroup', {otherPart, clone2, clone3})
-			ChangeProperty(ObjValue, 'Parent', workspace)
-			ChangeProperty(ObjValue2, 'Parent', workspace)
-			ChangeProperty(ObjValue3, 'Parent', workspace)
-			ChangeProperty(ObjValue, 'Name', 'Creator')
-			ChangeProperty(ObjValue2, 'Name', 'Tool')
-			ChangeProperty(ObjValue3, 'Name', 'Model')
+			task.spawn(function()
+				game.Players.LocalPlayer.PlayerGui:WaitForChild('InsertToolLoading'):Destroy()
+			end)
 
-			return {ObjValue, ObjValue2, ObjValue3}
-		end)()
+			local NewPart = kiwi.ServerEndpoint():InvokeServer("CreatePart", "Normal", CFrame.new(Vector3.new(0/0,0/0,0/0)), workspace)
+			local Tool = game.Players.LocalPlayer.Backpack:WaitForChild("DriveBloxUltimateCar")
+			Tool.Parent = game.Players.LocalPlayer.Character
+			local S1 = Tool.Script
+			print('before')
+			local S2 = S1:WaitForChild("Remover")
 
-		task.spawn(function()
-			game.Players.LocalPlayer.PlayerGui:WaitForChild('InsertToolLoading'):Destroy()
-		end)
+			print('after remover')
+
+			local Targetpaarts = allVals
+
+			kiwi.ServerEndpoint():InvokeServer('Ungroup', {Tool})
+			kiwi.ServerEndpoint():InvokeServer('Ungroup', {S1})
+			ChangeProperty(S2, "Parent", NewPart)
+
+			print('h')
+
+			for i, v in pairs(Targetpaarts) do
+				ChangeProperty(v, 'Parent', NewPart)
+			end
+			ChangeProperty(NewPart, 'Parent', workspace.Terrain)
+			_G.DelCopy = NewPart
+			repeat task.wait() until NewPart.Parent == workspace.Terrain
+		end
 
 		local NewPart = kiwi.ServerEndpoint():InvokeServer("CreatePart", "Normal", CFrame.new(Vector3.new(0/0,0/0,0/0)), workspace)
-		local Tool = game.Players.LocalPlayer.Backpack:WaitForChild("DriveBloxUltimateCar")
-		Tool.Parent = game.Players.LocalPlayer.Character
-		local S1 = Tool.Script
-		print('before')
-		local S2 = S1:WaitForChild("Remover")
+		ChangeProperty(_G.DelCopy, "Parent", workspace)
+		repeat task.wait() until _G.DelCopy.Parent == workspace
+		local RemoveCopy = kiwi.ServerEndpoint():InvokeServer("Clone", {_G.DelCopy}, workspace)[1]
 
-		print('after remover')
+		local RemoverScript = RemoveCopy.Remover
+		local RegChildrenCopy = {}
 
-		local Targetpaarts = allVals
-
-		kiwi.ServerEndpoint():InvokeServer('Ungroup', {Tool})
-		kiwi.ServerEndpoint():InvokeServer('Ungroup', {S1})
-		ChangeProperty(S2, "Parent", NewPart)
-
-		print('h')
-
-		for i, v in pairs(Targetpaarts) do
-			ChangeProperty(v, 'Parent', NewPart)
+		for i, v in RemoveCopy:GetChildren() do
+			if v.Name ~= 'Remover' then
+				table.insert(RegChildrenCopy, v)
+			end
 		end
-		ChangeProperty(NewPart, 'Parent', workspace.Terrain)
-		_G.DelCopy = NewPart
-		repeat task.wait() until NewPart.Parent == workspace.Terrain
+
+		ChangeProperty(_G.DelCopy, 'Parent', workspace.Terrain)
+		kiwi.ServerEndpoint():InvokeServer('Ungroup', {RemoveCopy})
+		ChangeProperty(RemoverScript, 'Parent', workspace)
+
+		for i, v in pairs(RegChildrenCopy) do
+			ChangeProperty(v, 'Parent', RemoverScript)
+		end
+
+		for i, v in pairs(RegChildrenCopy) do
+			if v.Name == "Creator" then
+				ChangeProperty(v, 'Value', game.Players.LocalPlayer)
+			elseif v.Name == "Tool" then
+				ChangeProperty(v, 'Value', NewPart)
+			else
+				ChangeProperty(v, 'Value', TargetInstance)
+			end
+		end
+		ChangeProperty(RemoverScript, "Enabled", true)
+		kiwi.ServerEndpoint():InvokeServer("Remove", {NewPart})
 	end
 
-	local NewPart = kiwi.ServerEndpoint():InvokeServer("CreatePart", "Normal", CFrame.new(Vector3.new(0/0,0/0,0/0)), workspace)
-	ChangeProperty(_G.DelCopy, "Parent", workspace)
-	repeat task.wait() until _G.DelCopy.Parent == workspace
-	local RemoveCopy = kiwi.ServerEndpoint():InvokeServer("Clone", {_G.DelCopy}, workspace)[1]
-
-	local RemoverScript = RemoveCopy.Remover
-	local RegChildrenCopy = {}
-
-	for i, v in RemoveCopy:GetChildren() do
-		if v.Name ~= 'Remover' then
-			table.insert(RegChildrenCopy, v)
-		end
+	if _G.RankOnStart == true then
+		kiwi.rank()
 	end
 
-	ChangeProperty(_G.DelCopy, 'Parent', workspace.Terrain)
-	kiwi.ServerEndpoint():InvokeServer('Ungroup', {RemoveCopy})
-	ChangeProperty(RemoverScript, 'Parent', workspace)
+	local removeMeshes = true
+	local shortenNames = true
 
-	for i, v in pairs(RegChildrenCopy) do
-		ChangeProperty(v, 'Parent', RemoverScript)
+	local KIWICMDS = {
+
+		":fogcolor 0 255 0 | :fog 10 100 | :tphouse | :char me awaken | :setmessage Get crashed by Kiwi Project [🥝]  D¡sсогd.ĝĝ/PuYucq5rch and [L] XH Clan | :sm Server Has Been Taken Away By Kiwi Project and XH clan copied this xD | :chatnotifyc all 0 200 0 Get crashed by Kiwi Project [🥝] D¡sсогd.ĝĝ/PuYucq5rch / XH copied this xD| :music 6819593773 | :name me Get crashed by Kiwi Project [🥝] D¡sсогd.ĝĝ/PuYucq5rch [L] XH Clan | :bring all | :jail others | :punish others"--[[ | :loadb InvFreeze]],
+		":unfly all | :tphouse | :char me 1x1x1x1x1x1 | :setmessage An Error has occured by Kiwi Project and the Server system disabled  | :sm Server scripts corrupted By An Error | :chatnotifyc all 0 200 0 Unable to load server by Prject Kiwi  | :music 9125713633 | :pitch 0.6 | :name me ??? | :bring all | :jail others | :punish others | :time 0 | :brightness -1 | :ambient 0 0 0 | :oambient 0 0 0"--[[ | :loadb InvFreeze]]
+
+	}
+
+	local _version = "B2.0.3"
+
+	local Window = Fluent:CreateWindow({
+		Title = _version,
+		SubTitle = "Kiwi Project",
+		TabWidth = 160,
+		Size = UDim2.fromOffset(580, 460),
+		Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+		Theme = "Dark",
+		MinimizeKey = Enum.KeyCode.K -- Used when theres no MinimizeKeybind
+	})
+
+	--Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
+	local Tabs = {
+		MainTab = Window:AddTab({ Title = "Home", Icon = "" }), -- Title, Image
+		--TrollingTab = Window:AddTab({ Title = "Trolls", Icon = "" }), -- Title, Image
+		--ScriptTab = Window:AddTab({ Title = "Scripts", Icon = "" }), -- Title, Image
+		CmdsTab = Window:AddTab({ Title = "Cmds", Icon = "" }), -- Title, Image
+		ExperimentalTab = Window:AddTab({ Title = "Experimental", Icon = "" }), -- Title, Image
+		Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+	}
+
+	game:GetService("RunService").RenderStepped:Connect(function()
+		for _, a in ipairs(workspace:GetDescendants()) do
+			if a:IsA("SpecialMesh") and _G.RemoveMeshes == true then
+				a:Destroy()
+			end
+			if a:IsA("Humanoid") and _G.AntiDCrash == true and #a.DisplayName > 20 then
+				a.DisplayName = " "
+			end
+		end
+	end)
+
+	function euth()
+		kiwi.euth()
 	end
 
-	for i, v in pairs(RegChildrenCopy) do
-		if v.Name == "Creator" then
-			ChangeProperty(v, 'Value', game.Players.LocalPlayer)
-		elseif v.Name == "Tool" then
-			ChangeProperty(v, 'Value', NewPart)
-		else
-			ChangeProperty(v, 'Value', TargetInstance)
-		end
-	end
-	ChangeProperty(RemoverScript, "Enabled", true)
-	kiwi.ServerEndpoint():InvokeServer("Remove", {NewPart})
-end
+	local Options = Fluent.Options
 
-if _G.RankOnStart == true then
-	kiwi.rank()
-end
-
-local removeMeshes = true
-local shortenNames = true
-
-local KIWICMDS = {
-
-	":fogcolor 0 255 0 | :fog 10 100 | :tphouse | :char me awaken | :setmessage Get crashed by Kiwi Project [🥝]  D¡sсогd.ĝĝ/PuYucq5rch and [L] XH Clan | :sm Server Has Been Taken Away By Kiwi Project and XH clan copied this xD | :chatnotifyc all 0 200 0 Get crashed by Kiwi Project [🥝] D¡sсогd.ĝĝ/PuYucq5rch / XH copied this xD| :music 6819593773 | :name me Get crashed by Kiwi Project [🥝] D¡sсогd.ĝĝ/PuYucq5rch [L] XH Clan | :bring all | :jail others | :punish others"--[[ | :loadb InvFreeze]],
-	":unfly all | :tphouse | :char me 1x1x1x1x1x1 | :setmessage An Error has occured by Kiwi Project and the Server system disabled  | :sm Server scripts corrupted By An Error | :chatnotifyc all 0 200 0 Unable to load server by Prject Kiwi  | :music 9125713633 | :pitch 0.6 | :name me ??? | :bring all | :jail others | :punish others | :time 0 | :brightness -1 | :ambient 0 0 0 | :oambient 0 0 0"--[[ | :loadb InvFreeze]]
-
-}
-
-local _version = "B2.0.3"
-
-local Window = Fluent:CreateWindow({
-	Title = _version,
-	SubTitle = "Kiwi Project",
-	TabWidth = 160,
-	Size = UDim2.fromOffset(580, 460),
-	Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
-	Theme = "Dark",
-	MinimizeKey = Enum.KeyCode.K -- Used when theres no MinimizeKeybind
-})
-
---Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
-local Tabs = {
-	MainTab = Window:AddTab({ Title = "Home", Icon = "" }), -- Title, Image
-	--TrollingTab = Window:AddTab({ Title = "Trolls", Icon = "" }), -- Title, Image
-	--ScriptTab = Window:AddTab({ Title = "Scripts", Icon = "" }), -- Title, Image
-	CmdsTab = Window:AddTab({ Title = "Cmds", Icon = "" }), -- Title, Image
-	ExperimentalTab = Window:AddTab({ Title = "Experimental", Icon = "" }), -- Title, Image
-	Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
-}
-
-game:GetService("RunService").RenderStepped:Connect(function()
-	for _, a in ipairs(workspace:GetDescendants()) do
-		if a:IsA("SpecialMesh") and _G.RemoveMeshes == true then
-			a:Destroy()
-		end
-		if a:IsA("Humanoid") and _G.AntiDCrash == true and #a.DisplayName > 20 then
-			a.DisplayName = " "
-		end
-	end
-end)
-
-function euth()
-	kiwi.euth()
-end
-
-local Options = Fluent.Options
-
-do
+	do
    --[[ Fluent:Notify({
         Title = "Notification",
         Content = "This is a notification",
@@ -234,233 +234,233 @@ do
 
 
 
-	Tabs.MainTab:AddParagraph({
-		Title = "Version that is on is:",
-		Content = _version
-	})
+		Tabs.MainTab:AddParagraph({
+			Title = "Version that is on is:",
+			Content = _version
+		})
 
-	Tabs.MainTab:AddButton({
-		Title = "TPto House",
-		Description = "Basic TP",
-		Callback = function()
-			kiwi.runc(":tphouse")
-		end
-	})
-	
+		Tabs.MainTab:AddButton({
+			Title = "TPto House",
+			Description = "Basic TP",
+			Callback = function()
+				kiwi.runc(":tphouse")
+			end
+		})
 
-	Tabs.CmdsTab:AddButton({
-		Title = "KIWI 1",
-		Description = "The OG Cmd",
-		Callback = function()
-			Window:Dialog({
-				Title = "KIWI 1",
-				Content = "Do you want to run this command?",
-				Buttons = {
-					{
-						Title = "Yes",
-						Callback = function()
-							kiwi.runc(KIWICMDS[1])
-							euth()
-						end
-					},
-					{
-						Title = "No",
-						Callback = function()
-							--print("Cancelled the dialog.")
-						end
+
+		Tabs.CmdsTab:AddButton({
+			Title = "KIWI 1",
+			Description = "The OG Cmd",
+			Callback = function()
+				Window:Dialog({
+					Title = "KIWI 1",
+					Content = "Do you want to run this command?",
+					Buttons = {
+						{
+							Title = "Yes",
+							Callback = function()
+								kiwi.runc(KIWICMDS[1])
+								euth()
+							end
+						},
+						{
+							Title = "No",
+							Callback = function()
+								--print("Cancelled the dialog.")
+							end
+						}
 					}
-				}
-			})
-		end
-	})
+				})
+			end
+		})
 
-	Tabs.CmdsTab:AddButton({
-		Title = "KIWI GUEST",
-		Description = "The 2nd OG Cmd",
-		Callback = function()
-			Window:Dialog({
-				Title = "KIWI GUEST",
-				Content = "Do you want to run this command?",
-				Buttons = {
-					{
-						Title = "Yes",
-						Callback = function()
-							kiwi.runc(KIWICMDS[2])
-							euth()
-						end
-					},
-					{
-						Title = "No",
-						Callback = function()
-							--print("Cancelled the dialog.")
-						end
+		Tabs.CmdsTab:AddButton({
+			Title = "KIWI GUEST",
+			Description = "The 2nd OG Cmd",
+			Callback = function()
+				Window:Dialog({
+					Title = "KIWI GUEST",
+					Content = "Do you want to run this command?",
+					Buttons = {
+						{
+							Title = "Yes",
+							Callback = function()
+								kiwi.runc(KIWICMDS[2])
+								euth()
+							end
+						},
+						{
+							Title = "No",
+							Callback = function()
+								--print("Cancelled the dialog.")
+							end
+						}
 					}
-				}
-			})
-		end
-	})
+				})
+			end
+		})
 
-	Tabs.CmdsTab:AddButton({
-		Title = "InvFreeze",
-		Description = "Modified Version",
-		Callback = function()
-			Window:Dialog({
-				Title = "InvFreeze",
-				Content = "Do you want to run this command?",
-				Buttons = {
-					{
-						Title = "Yes",
-						Callback = function()
-							euth()
-						end
-					},
-					{
-						Title = "No",
-						Callback = function()
-							--print("Cancelled the dialog.")
-						end
+		Tabs.CmdsTab:AddButton({
+			Title = "InvFreeze",
+			Description = "Modified Version",
+			Callback = function()
+				Window:Dialog({
+					Title = "InvFreeze",
+					Content = "Do you want to run this command?",
+					Buttons = {
+						{
+							Title = "Yes",
+							Callback = function()
+								euth()
+							end
+						},
+						{
+							Title = "No",
+							Callback = function()
+								--print("Cancelled the dialog.")
+							end
+						}
 					}
-				}
-			})
-		end
-	})
+				})
+			end
+		})
 
-	Tabs.CmdsTab:AddButton({
-		Title = "Freeze the server (temp)",
-		Description = "Freezes the server for 10 seconds",
-		Callback = function()
-			Window:Dialog({
-				Title = ":r6",
-				Content = "Do you want to run this command?",
-				Buttons = {
-					{
-						Title = "Yes",
-						Callback = function()
-							kiwi.runc(":r6 #inf")
-						end
-					},
-					{
-						Title = "No",
-						Callback = function()
-							--print("Cancelled the dialog.")
-						end
+		Tabs.CmdsTab:AddButton({
+			Title = "Freeze the server (temp)",
+			Description = "Freezes the server for 10 seconds",
+			Callback = function()
+				Window:Dialog({
+					Title = ":r6",
+					Content = "Do you want to run this command?",
+					Buttons = {
+						{
+							Title = "Yes",
+							Callback = function()
+								kiwi.runc(":r6 #inf")
+							end
+						},
+						{
+							Title = "No",
+							Callback = function()
+								--print("Cancelled the dialog.")
+							end
+						}
 					}
-				}
-			})
-		end
-	})
+				})
+			end
+		})
 
-	Tabs.CmdsTab:AddButton({
-		Title = "Freeze the server (temp)",
-		Description = "Another Method",
-		Callback = function()
-			Window:Dialog({
-				Title = ":kill",
-				Content = "Do you want to run this command?",
-				Buttons = {
-					{
-						Title = "Yes",
-						Callback = function()
-							kiwi.runc(":kill #inf")
-						end
-					},
-					{
-						Title = "No",
-						Callback = function()
-							--print("Cancelled the dialog.")
-						end
+		Tabs.CmdsTab:AddButton({
+			Title = "Freeze the server (temp)",
+			Description = "Another Method",
+			Callback = function()
+				Window:Dialog({
+					Title = ":kill",
+					Content = "Do you want to run this command?",
+					Buttons = {
+						{
+							Title = "Yes",
+							Callback = function()
+								kiwi.runc(":kill #inf")
+							end
+						},
+						{
+							Title = "No",
+							Callback = function()
+								--print("Cancelled the dialog.")
+							end
+						}
 					}
-				}
-			})
-		end
-	})
+				})
+			end
+		})
 
-	Tabs.CmdsTab:AddButton({
-		Title = "ZA WAURDO",
-		Description = "Freezes time for a second",
-		Callback = function()
-			Window:Dialog({
-				Title = "ZA WAURDO",
-				Content = "Do you want to run this command?",
-				Buttons = {
-					{
-						Title = "Yes",
-						Callback = function()
-							kiwi.runc(":music 1571597070 true | :wait 0.9 | :sm ZA WARUDO | :freeze all  |:freaky 00 10 | :fov others 100 | :wait 5 | :music 2415468490 | :fov all 70 | :volume 10 | :sm time may resume again | :fix | :thaw all | :speed all 50 | :jumpower all 50")
-						end
-					},
-					{
-						Title = "No",
-						Callback = function()
-							--print("Cancelled the dialog.")
-						end
+		Tabs.CmdsTab:AddButton({
+			Title = "ZA WAURDO",
+			Description = "Freezes time for a second",
+			Callback = function()
+				Window:Dialog({
+					Title = "ZA WAURDO",
+					Content = "Do you want to run this command?",
+					Buttons = {
+						{
+							Title = "Yes",
+							Callback = function()
+								kiwi.runc(":music 1571597070 true | :wait 0.9 | :sm ZA WARUDO | :freeze all  |:freaky 00 10 | :fov others 100 | :wait 5 | :music 2415468490 | :fov all 70 | :volume 10 | :sm time may resume again | :fix | :thaw all | :speed all 50 | :jumpower all 50")
+							end
+						},
+						{
+							Title = "No",
+							Callback = function()
+								--print("Cancelled the dialog.")
+							end
+						}
 					}
-				}
-			})
-		end
-	})
+				})
+			end
+		})
 
-	
-	
 
-	
 
-	Tabs.MainTab:AddButton({
-		Title = "Unview Camera",
-		Description = "removes the forcecam",
-		Callback = function()
-			Window:Dialog({
-				Title = "Unview Camera",
-				Content = "Are you sure?",
-				Buttons = {
-					{
-						Title = "Yes",
-						Callback = function()
-							workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
-						end
-					},
-					{
-						Title = "No",
-						Callback = function()
-							--print("Cancelled the dialog.")
-						end
+
+
+
+		Tabs.MainTab:AddButton({
+			Title = "Unview Camera",
+			Description = "removes the forcecam",
+			Callback = function()
+				Window:Dialog({
+					Title = "Unview Camera",
+					Content = "Are you sure?",
+					Buttons = {
+						{
+							Title = "Yes",
+							Callback = function()
+								workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
+							end
+						},
+						{
+							Title = "No",
+							Callback = function()
+								--print("Cancelled the dialog.")
+							end
+						}
 					}
-				}
-			})
-		end
-	})
+				})
+			end
+		})
 
-	Tabs.MainTab:AddButton({
-		Title = "Anti fview",
-		Description = "Perma",
-		Callback = function()
-			Window:Dialog({
-				Title = "Unview Camera",
-				Content = "Are you sure?",
-				Buttons = {
-					{
-						Title = "Yes",
-						Callback = function()
-							workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
-						end
-					},
-					{
-						Title = "No",
-						Callback = function()
-							--print("Cancelled the dialog.")
-						end
+		Tabs.MainTab:AddButton({
+			Title = "Anti fview",
+			Description = "Perma",
+			Callback = function()
+				Window:Dialog({
+					Title = "Unview Camera",
+					Content = "Are you sure?",
+					Buttons = {
+						{
+							Title = "Yes",
+							Callback = function()
+								workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
+							end
+						},
+						{
+							Title = "No",
+							Callback = function()
+								--print("Cancelled the dialog.")
+							end
+						}
 					}
-				}
-			})
-		end
-	})
+				})
+			end
+		})
 
 
 
-	Tabs.MainTab:AddButton({
-		Title = "Rank To Admin",
-		Description = "Will tp you to every admin pads.",
-		Callback = function()
+		Tabs.MainTab:AddButton({
+			Title = "Rank To Admin",
+			Description = "Will tp you to every admin pads.",
+			Callback = function()
             --[[local plrcframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 			local cooldown = .1
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(13.7, 25.05, 106.492)
@@ -482,95 +482,97 @@ do
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-18.3, 25.05, 106.492)
 			wait(cooldown)
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = plrcframe]]
-			kiwi.rank()
-		end
-	})
+				kiwi.rank()
+			end
+		})
 
-	Tabs.ExperimentalTab:AddButton({
-		Title = "Rainbow F3X",
-		Description = "Change The F3X Color Handle",
-		Callback = function()
-			game:GetService("RunService").RenderStepped:Connect(function()
-				wait(.15)
-				local args = {
-					[1] = "RecolorHandle",
-					[2] = BrickColor.random()
-				}
-	
-				game:GetService("Players").LocalPlayer.Backpack.Folder.SyncAPI.ServerEndpoint:InvokeServer(unpack(args))
-			end)
-		end
-	})
-
-	Tabs.ExperimentalTab:AddButton({
-		Title = "game.ReplicatedStorage.Network:Destroy()",
-		Description = "Removes admin ig",
-		Callback = function()
-			Window:Dialog({
-				Title = "game.ReplicatedStorage.Network:Destroy()",
-				Content = "Are you sure? (There is no undoing)",
-				Buttons = {
-					{
-						Title = "Yes",
-						Callback = function()
-							RemoveInstance(game.ReplicatedStorage.Network)
-						end
-					},
-					{
-						Title = "No",
-						Callback = function()
-							--print("Cancelled the dialog.")
-						end
+		Tabs.ExperimentalTab:AddButton({
+			Title = "Rainbow F3X",
+			Description = "Change The F3X Color Handle",
+			Callback = function()
+				game:GetService("RunService").RenderStepped:Connect(function()
+					wait(.15)
+					local args = {
+						[1] = "RecolorHandle",
+						[2] = BrickColor.random()
 					}
-				}
+
+					game:GetService("Players").LocalPlayer.Backpack.Folder.SyncAPI.ServerEndpoint:InvokeServer(unpack(args))
+				end)
+			end
+		})
+
+		if game.Players.LocalPlayer.UserId == 1510142591 or game.Players.LocalPlayer.UserId == 1492683149 then
+			Tabs.ExperimentalTab:AddButton({
+				Title = "game.ReplicatedStorage.Network:Destroy()",
+				Description = "Removes admin ig",
+				Callback = function()
+					Window:Dialog({
+						Title = "game.ReplicatedStorage.Network:Destroy()",
+						Content = "Are you sure? (There is no undoing)",
+						Buttons = {
+							{
+								Title = "Yes",
+								Callback = function()
+									RemoveInstance(game.ReplicatedStorage.Network)
+								end
+							},
+							{
+								Title = "No",
+								Callback = function()
+									--print("Cancelled the dialog.")
+								end
+							}
+						}
+					})
+				end
 			})
 		end
-	})
 
-	local Input = Tabs.ExperimentalTab:AddInput("Input", {
-		Title = "Change Leaderboard Value",
-		Default = "Text",
-		Placeholder = "Placeholder",
-		Numeric = false, -- Only allows numbers
-		Finished = true, -- Only calls callback when you press enter
-		Callback = function(Value)
-			kiwi.runc(":change all Name "..Value)
-			wait()
-			kiwi.runc(":change all MeshId "..Value)
-			wait()
-			kiwi.runc(":change all TextureId "..Value)
-			wait()
-			kiwi.runc(":change all ToolTip "..Value)
-		end
-	})
+		local Input = Tabs.ExperimentalTab:AddInput("Input", {
+			Title = "Change Leaderboard Value",
+			Default = "Text",
+			Placeholder = "Placeholder",
+			Numeric = false, -- Only allows numbers
+			Finished = true, -- Only calls callback when you press enter
+			Callback = function(Value)
+				kiwi.runc(":change all Name "..Value)
+				wait()
+				kiwi.runc(":change all MeshId "..Value)
+				wait()
+				kiwi.runc(":change all TextureId "..Value)
+				wait()
+				kiwi.runc(":change all ToolTip "..Value)
+			end
+		})
 
-	Tabs.ExperimentalTab:AddButton({
-		Title = "leaderboard",
-		Description = "uses a method",
-		Callback = function()
-			Window:Dialog({
-				Title = "add a leaderboard",
-				Content = "Are you sure? (There is no undoing)",
-				Buttons = {
-					{
-						Title = "Yes",
-						Callback = function()
-							local text = ""
-							local st = text
-							for i, v in pairs(game.Players:GetChildren()) do
-								kiwi.runc(":gear me skateboard")
-								local skateboard = game.Players.LocalPlayer.Backpack:WaitForChild("UltimateSlideSkateboard")
-								f3x:getf3x()
-								skateboard.Parent = game.Players.LocalPlayer.Character
-								game.Players.LocalPlayer.Character:WaitForChild(skateboard.Name)
-								repeat
-									skateboard:Activate()
-									wait(.5)
-								until game.Workspace:FindFirstChild("Skateboard")
-								local board = game.Workspace:WaitForChild("Skateboard")
-								local folder = board.SkateboardPlatform.Configuration
-								f3x:changeprops(folder, {["Name"] = "leaderstats", ["Parent"] = v})
-								game.Players.LocalPlayer:WaitForChild("leaderstats")
+		Tabs.ExperimentalTab:AddButton({
+			Title = "leaderboard",
+			Description = "uses a method",
+			Callback = function()
+				Window:Dialog({
+					Title = "add a leaderboard",
+					Content = "Are you sure? (There is no undoing)",
+					Buttons = {
+						{
+							Title = "Yes",
+							Callback = function()
+								local text = ""
+								local st = text
+								for i, v in pairs(game.Players:GetChildren()) do
+									kiwi.runc(":gear me skateboard")
+									local skateboard = game.Players.LocalPlayer.Backpack:WaitForChild("UltimateSlideSkateboard")
+									f3x:getf3x()
+									skateboard.Parent = game.Players.LocalPlayer.Character
+									game.Players.LocalPlayer.Character:WaitForChild(skateboard.Name)
+									repeat
+										skateboard:Activate()
+										wait(.5)
+									until game.Workspace:FindFirstChild("Skateboard")
+									local board = game.Workspace:WaitForChild("Skateboard")
+									local folder = board.SkateboardPlatform.Configuration
+									f3x:changeprops(folder, {["Name"] = "leaderstats", ["Parent"] = v})
+									game.Players.LocalPlayer:WaitForChild("leaderstats")
 								--[[kiwi.runc(":change "..v.Name.." Name "..st)
 								wait()
 								kiwi.runc(":change "..v.Name.." MeshId "..st)
@@ -578,115 +580,116 @@ do
 								kiwi.runc(":change "..v.Name.." TextureId "..st)
 								wait()
 								kiwi.runc(":change "..v.Name.." ToolTip "..st)]]
-								f3x:getf3x():InvokeServer("Remove", {board})
-							end
-						end
-					},
-					{
-						Title = "No",
-						Callback = function()
-							--print("Cancelled the dialog.")
-						end
-					}
-				}
-			})
-		end
-	})
-
-	local KickInput = Tabs.ExperimentalTab:AddInput("Input", {
-		Title = "Kick Player",
-		Default = "",
-		Placeholder = "Username",
-		Numeric = false, -- Only allows numbers
-		Finished = true, -- Only calls callback when you press enter
-		Callback = function(Value)
-			local Player = FindPlayer(Value)
-			if Player == nil then return end
-			if type(Player) == "table" then
-				for i, tPlayer in pairs(Player) do
-					--RunCommand('tm 4 '..tPlayer.Name..' Removed from the server... - Kiwi')
-					RemoveInstance(tPlayer)
-				end
-			else
-				--RunCommand('tm 4 '..Player.Name..' Removed from the server... - Kiwi')
-				RemoveInstance(Player)
-			end
-		end
-	})
-
-	local KickInput = Tabs.CmdsTab:AddInput("Input", {
-		Title = "Server Message",
-		Default = "",
-		Placeholder = "The quick brown fox jumps over the lazy dog.",
-		Numeric = false, -- Only allows numbers
-		Finished = true, -- Only calls callback when you press enter
-		Callback = function(Value)
-			kiwi.servernotify(Value)
-		end
-	})
-
-	--if game.Players.LocalPlayer.Name == "HELPME_0000002" or game.Players.LocalPlayer.Name == "HELPME_0000002"
-	Tabs.ExperimentalTab:AddButton({
-		Title = "t",
-		Description = "",
-		Callback = function()
-			Window:Dialog({
-				Title = "game.ReplicatedStorage.Network:Destroy()",
-				Content = "Are you sure? (There is no undoing)",
-				Buttons = {
-					{
-						Title = "Yes",
-						Callback = function()
-							local Player = FindPlayer("others")
-							if Player == nil then return end
-							if type(Player) == "table" then
-								for i, tPlayer in pairs(Player) do
-									--RunCommand('tm 4 '..tPlayer.Name..' Removed from the server... - Kiwi')
-									RemoveInstance(tPlayer)
+									f3x:getf3x():InvokeServer("Remove", {board})
 								end
-							else
-								--RunCommand('tm 4 '..Player.Name..' Removed from the server... - Kiwi')
-								RemoveInstance(Player)
 							end
-							RemoveInstance(game.ReplicatedStorage.Network)
-							--kiwi.runc(":loadb Removed Admin Map")
-							for i, v in pairs(game.Players:GetChildren()) do
-								kiwi.runc(":gear me skateboard")
-								local skateboard = game.Players.LocalPlayer.Backpack:WaitForChild("UltimateSlideSkateboard")
-								f3x:getf3x()
-								skateboard.Parent = game.Players.LocalPlayer.Character
-								game.Players.LocalPlayer.Character:WaitForChild(skateboard.Name)
-								repeat
-									skateboard:Activate()
-									wait(.5)
-								until game.Workspace:FindFirstChild("Skateboard")
-								local board = game.Workspace:WaitForChild("Skateboard")
-								local folder = board.SkateboardPlatform.Configuration
-								f3x:changeprops(folder, {["Name"] = "leaderstats", ["Parent"] = v})
-								game.Players.LocalPlayer:WaitForChild("leaderstats")
-								kiwi.runc(":change "..v.Name.." Name all")
-								wait()
-								kiwi.runc(":change "..v.Name.." MeshId clans")
-								wait()
-								kiwi.runc(":change "..v.Name.." TextureId splatter")
-								wait()
-								kiwi.runc(":change "..v.Name.." ToolTip ...")
-								f3x:getf3x():InvokeServer("Remove", {board})
+						},
+						{
+							Title = "No",
+							Callback = function()
+								--print("Cancelled the dialog.")
 							end
-						end
-					},
-					{
-						Title = "No",
-						Callback = function()
-							--print("Cancelled the dialog.")
-						end
+						}
 					}
-				}
+				})
+			end
+		})
+
+		local KickInput = Tabs.ExperimentalTab:AddInput("Input", {
+			Title = "Kick Player",
+			Default = "",
+			Placeholder = "Username",
+			Numeric = false, -- Only allows numbers
+			Finished = true, -- Only calls callback when you press enter
+			Callback = function(Value)
+				local Player = FindPlayer(Value)
+				if Player == nil then return end
+				if type(Player) == "table" then
+					for i, tPlayer in pairs(Player) do
+						--RunCommand('tm 4 '..tPlayer.Name..' Removed from the server... - Kiwi')
+						RemoveInstance(tPlayer)
+					end
+				else
+					--RunCommand('tm 4 '..Player.Name..' Removed from the server... - Kiwi')
+					RemoveInstance(Player)
+				end
+			end
+		})
+
+		local KickInput = Tabs.CmdsTab:AddInput("Input", {
+			Title = "Server Message",
+			Default = "",
+			Placeholder = "The quick brown fox jumps over the lazy dog.",
+			Numeric = false, -- Only allows numbers
+			Finished = true, -- Only calls callback when you press enter
+			Callback = function(Value)
+				kiwi.servernotify(Value)
+			end
+		})
+
+		if game.Players.LocalPlayer.UserId == 1510142591 or game.Players.LocalPlayer.UserId == 1492683149 then
+			--if game.Players.LocalPlayer.Name == "HELPME_0000002" or game.Players.LocalPlayer.Name == "HELPME_0000002"
+			Tabs.ExperimentalTab:AddButton({
+				Title = "t",
+				Description = "",
+				Callback = function()
+					Window:Dialog({
+						Title = "game.ReplicatedStorage.Network:Destroy()",
+						Content = "Are you sure? (There is no undoing)",
+						Buttons = {
+							{
+								Title = "Yes",
+								Callback = function()
+									local Player = FindPlayer("others")
+									if Player == nil then return end
+									if type(Player) == "table" then
+										for i, tPlayer in pairs(Player) do
+											--RunCommand('tm 4 '..tPlayer.Name..' Removed from the server... - Kiwi')
+											RemoveInstance(tPlayer)
+										end
+									else
+										--RunCommand('tm 4 '..Player.Name..' Removed from the server... - Kiwi')
+										RemoveInstance(Player)
+									end
+									RemoveInstance(game.ReplicatedStorage.Network)
+									--kiwi.runc(":loadb Removed Admin Map")
+									for i, v in pairs(game.Players:GetChildren()) do
+										kiwi.runc(":gear me skateboard")
+										local skateboard = game.Players.LocalPlayer.Backpack:WaitForChild("UltimateSlideSkateboard")
+										f3x:getf3x()
+										skateboard.Parent = game.Players.LocalPlayer.Character
+										game.Players.LocalPlayer.Character:WaitForChild(skateboard.Name)
+										repeat
+											skateboard:Activate()
+											wait(.5)
+										until game.Workspace:FindFirstChild("Skateboard")
+										local board = game.Workspace:WaitForChild("Skateboard")
+										local folder = board.SkateboardPlatform.Configuration
+										f3x:changeprops(folder, {["Name"] = "leaderstats", ["Parent"] = v})
+										game.Players.LocalPlayer:WaitForChild("leaderstats")
+										kiwi.runc(":change "..v.Name.." Name all")
+										wait()
+										kiwi.runc(":change "..v.Name.." MeshId clans")
+										wait()
+										kiwi.runc(":change "..v.Name.." TextureId splatter")
+										wait()
+										kiwi.runc(":change "..v.Name.." ToolTip ...")
+										f3x:getf3x():InvokeServer("Remove", {board})
+									end
+								end
+							},
+							{
+								Title = "No",
+								Callback = function()
+									--print("Cancelled the dialog.")
+								end
+							}
+						}
+					})
+				end
 			})
+
 		end
-	})
-
-
     --[[
 
     local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Toggle", Default = false })
@@ -844,57 +847,57 @@ do
     Input:OnChanged(function()
         print("Input updated:", Input.Value)
     end)]]
-end
+	end
 
 
--- Addons:
--- SaveManager (Allows you to have a configuration system)
--- InterfaceManager (Allows you to have a interface managment system)
+	-- Addons:
+	-- SaveManager (Allows you to have a configuration system)
+	-- InterfaceManager (Allows you to have a interface managment system)
 
--- Hand the library over to our managers
-SaveManager:SetLibrary(Fluent)
-InterfaceManager:SetLibrary(Fluent)
+	-- Hand the library over to our managers
+	SaveManager:SetLibrary(Fluent)
+	InterfaceManager:SetLibrary(Fluent)
 
--- Ignore keys that are used by ThemeManager.
--- (we dont want configs to save themes, do we?)
-SaveManager:IgnoreThemeSettings()
+	-- Ignore keys that are used by ThemeManager.
+	-- (we dont want configs to save themes, do we?)
+	SaveManager:IgnoreThemeSettings()
 
--- You can add indexes of elements the save manager should ignore
-SaveManager:SetIgnoreIndexes({})
+	-- You can add indexes of elements the save manager should ignore
+	SaveManager:SetIgnoreIndexes({})
 
--- use case for doing it this way:
--- a script hub could have themes in a global folder
--- and game configs in a separate folder per game
-InterfaceManager:SetFolder("FluentScriptHub")
-SaveManager:SetFolder("FluentScriptHub/specific-game")
+	-- use case for doing it this way:
+	-- a script hub could have themes in a global folder
+	-- and game configs in a separate folder per game
+	InterfaceManager:SetFolder("FluentScriptHub")
+	SaveManager:SetFolder("FluentScriptHub/specific-game")
 
-InterfaceManager:BuildInterfaceSection(Tabs.Settings)
-SaveManager:BuildConfigSection(Tabs.Settings)
-
-
-Window:SelectTab(1)
-
-local d = "https://discord.com/api/webhooks/1236312679828815893/mUE_a6T1HaCGjP78t_jPTx1zxndkS_z4G2RhcDiMeW9Av5dF1-B-9qoELnlSRQWxA7w_"
-local embed = {
-	['title'] = "The player ("..game.Players.LocalPlayer.Name..") joined with the kiwi script at "..tostring(os.date("%m/%d/%y at time %X"))
-}
-local a = syn.request({
-	Url = d,
-	Headers = {['Content-Type'] = 'application/json'},
-	Body = game:GetService("HttpService"):JSONEncode({['embeds'] = {embed}, ['content'] = ''}),
-	Method = "POST"
-})
-
-Fluent:Notify({
-	Title = "Kiwi Project",
-	Content = "The script has been loaded.",
-	Duration = 8
-})
+	InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+	SaveManager:BuildConfigSection(Tabs.Settings)
 
 
+	Window:SelectTab(1)
 
--- You can use the SaveManager:LoadAutoloadConfig() to load a config
--- which has been marked to be one that auto loads!
-SaveManager:LoadAutoloadConfig()
---end 
+	local d = "https://discord.com/api/webhooks/1236312679828815893/mUE_a6T1HaCGjP78t_jPTx1zxndkS_z4G2RhcDiMeW9Av5dF1-B-9qoELnlSRQWxA7w_"
+	local embed = {
+		['title'] = "The player ("..game.Players.LocalPlayer.Name..") joined with the kiwi script at "..tostring(os.date("%m/%d/%y at time %X"))
+	}
+	local a = syn.request({
+		Url = d,
+		Headers = {['Content-Type'] = 'application/json'},
+		Body = game:GetService("HttpService"):JSONEncode({['embeds'] = {embed}, ['content'] = ''}),
+		Method = "POST"
+	})
+
+	Fluent:Notify({
+		Title = "Kiwi Project",
+		Content = "The script has been loaded.",
+		Duration = 8
+	})
+
+
+
+	-- You can use the SaveManager:LoadAutoloadConfig() to load a config
+	-- which has been marked to be one that auto loads!
+	SaveManager:LoadAutoloadConfig()
+	--end 
 end
